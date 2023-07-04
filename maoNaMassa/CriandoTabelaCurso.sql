@@ -34,11 +34,15 @@ CREATE TABLE [ItemCarreira] (
 CREATE TABLE [CursoEstudante] (
     [CursoId] UNIQUEIDENTIFIER NOT NULL,
     [EstudanteId] UNIQUEIDENTIFIER NOT NULL,
-    [Titulo] NVARCHAR(160) NOT NULL,
-    [Descricao] TEXT NOT NULL,
-    [Ordem] TINYINT NOT NULL,
+    [Progresso] TINYINT NOT NULL,
+    [Favorito] BIT NOT NULL,
+    [DataInicio] DATETIME NOT NULL,
+    [UltimaDataDeAtualizacao] DATETIME NOT NULL,
 
-    CONSTRAINT [PK_ItemCarreira] PRIMARY KEY([CarreiraId], [CursoId]),
-    CONSTRAINT [FK_ItemCarreira_Carreira_CarrairaId] FOREIGN KEY([CarreiraId]) REFERENCES [Carreira] ([Id]),
-    CONSTRAINT [FK_ItemCarreira_Curso_CursoId] FOREIGN KEY([CursoId]) REFERENCES [Curso] ([Id])
+    CONSTRAINT [PK_CursoEstudante] PRIMARY KEY([CursoId], [EstudanteId]),
+    CONSTRAINT [FK_CursoEstudante_Curso_CursoId] FOREIGN KEY([CursoId]) 
+        REFERENCES [Curso]([Id]),
+    CONSTRAINT [FK_CursoEstudante_Estudante_EstudanteId] FOREIGN KEY([EstudanteId]) 
+        REFERENCES [Estudantes]([Id]),
 );
+GO
